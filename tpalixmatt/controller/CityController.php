@@ -5,27 +5,27 @@
  * Date: 2019-02-28
  * Time: 15:10
  */
-
- namespace Controller;
- 
- 
-require_once ('ControllerBase.php');
+namespace Controller;
+use App\Src\App;
+use Controller\ControllerBase;
+use Model\Finder\CityFinder;
 
 class CityController extends ControllerBase
 {
-    public function __construct($model) {
-        parent::__construct($model);
+    public function __construct(App $app) {
+        parent::__construct($app);
+        session_start();
     }
 
     public function citiesHandler() {
-        // if(key_exists('flash', $_GET)) {
-            // $flash = urldecode($_GET['flash']);
-        // }
+        if($_SESSION['flash']) {
+            $flash = urldecode($_SESSION['flash']);
+        }
 
-        // $cities = $this->model->findAll();
-        // $this->render('cities', ["cities" => $cities, 'flash' => $flash ?? null]);
-		$cities = $this->model->findAll();
-		$this->render('cities', ["cities" => $cities]);
+        $_SESSION['flash'] = null;
+
+        $cities = $this->app->getService('cityFinder')->findAll();
+        $this->app->getService('render')('cities', ["cities" => $cities, 'flash' => $flash ?? null]);
     }
 
     public function cityHandler($id) {
@@ -33,15 +33,12 @@ class CityController extends ControllerBase
             $this->render('404');
         }
 
-        //$id = $_GET['id'];
-		
-        $city = $this->model->findOneById($id);
-		
-        $this->render('city', ['city' => $city]);
+        $city = $this->app->getService('cityFinder')->findOneById($id);
+        $this->app->getService('render')('city', ['city' => $city]);
     }
 
     public function createHandler() {
-        $this->render('createCity');
+        $this->app->getService('render')('createCity');
     }
 
     public function createDBHandler() {
@@ -52,32 +49,27 @@ class CityController extends ControllerBase
                 'life' => $_POST['life']
             ];
 
-            $result = $this->model->save($city);
+            $result = $this->app->getService('cityModel')->save($city);
 
             if(!$result) {
-                $this->render('createCity', ['city' => $city, 'error' => true]);
+                $this->app->getService('render')('createCity', ['city' => $city, 'error' => true]);
             }
 
-            $flash = "New city has been sucessfully created";
-            $this->redirect('/tp1_php/');
+            $_SESSION['flash'] = $flash = "New city has been sucessfully created";
+            $this->redirect('/Test/');
 
         } catch (Exception $e) {
-            $this->render('createCity', ['city' => $city, 'error' => $e]);
+            $this->app->getService('render')('createCity', ['city' => $city, 'error' => $e]);
         }
     }
 
-    public function searchHandler($search) {
-        if(!$search) { // On vérfie si la référence est bien passée
-            $this->render('404');
+    public function searchHandler($cityName) {
+        if(!$cityName) { // On vérfie si la référence est bien passée
+            $this->app->getService('render')('404');
         }
 
-        //$search = $_GET['search'];
 
-        $cities = $this->model->search($search);
-
-        $this->render('cities', ['cities' => $cities]);
+        $cities = $this->app->getService('cityModel')->search($cityName);
+        $this->app->getService('render')('cities', ['cities' => $cities]);
     }
-
-
-	
-	}
+}

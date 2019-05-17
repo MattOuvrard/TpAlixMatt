@@ -12,8 +12,9 @@
         <?php foreach ($params['cities'] as $city) : ?>
         <tr>
             <td>
-               <a href="/tp1_php/city/<?php echo $city['id'] ?>"><?=
-            $city['name']; ?></a>
+                <a href="/Test/countries/country/city/<?= $city['id']; ?>">
+                    <?= $city['name']; ?>
+                </a>
             </td>
         </tr>
         

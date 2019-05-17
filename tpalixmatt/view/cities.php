@@ -18,23 +18,23 @@
     <table>
         <?php foreach ($params['cities'] as $city) : ?>
         <tr>
-            <td><a href="city/<?php echo $city['id'] ?>"><?=
+            <td><a href="/Test/city/<?php echo $city->getId();?>"><?=
             $city['name']; ?></a></td>
-            <td><?= $city['country']; ?></td>
-            <td>Quality of life: <?= $city['life']; ?></td> <!--added property life-->
+            <td><?= $city->getCountry(); ?></td>
+            <td>Quality of life: <?= $city->getLife(); ?></td> <!--added property life-->
         </tr>
         
         <?php endforeach; ?>
 
     </table>
     <p>
-        <a href="search/">Search cities by name</a>
+        <a href="/Test/recherche/">Search cities by name</a>
     </p>
     <p>
-        <a href="createCity/">Create a new city</a>
+        <a href="/Test/create/">Create a new city</a>
     </p>
     <p>
-        <a href="country/">Countries</a>
+        <a href="/Test/countries/">Countries</a>
     </p>
 
     </body>

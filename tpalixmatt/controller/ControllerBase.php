@@ -5,18 +5,19 @@
  * Date: 2019-02-28
  * Time: 14:59
  */
+namespace Controller;
 
- namespace Controller;
- 
+use App\Src\App;
+
 abstract class ControllerBase
 {
     /**
      * @var \CityModel
      */
-    protected $model;
+    protected $app;
 
-    public function __construct($model) {
-        $this->model = $model;
+    public function __construct(App $app) {
+        $this->app = $app;
     }
 
     protected function render(String $template, Array $params = []) {

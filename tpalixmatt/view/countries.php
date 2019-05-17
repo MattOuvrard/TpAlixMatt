@@ -11,7 +11,7 @@
     <table>
         <?php foreach ($params['countries'] as $country) : ?>
         <tr>
-            <td><a href="<?= $country['country']; ?>"><?=
+            <td><a href="/Test/countries/country/<?= $country['country']; ?>"><?=
             $country['country']; ?></a></td>
         </tr>
         

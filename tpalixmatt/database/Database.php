@@ -1,5 +1,4 @@
 <?php
-
 namespace Database;
 
 class Database {
@@ -19,6 +18,4 @@ class Database {
     public function getConnection() {
         return $this->dbh;
     }
-
-    /* Coucou ca va */
 }

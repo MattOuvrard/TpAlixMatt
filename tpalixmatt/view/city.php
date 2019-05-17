@@ -1,5 +1,4 @@
 <!-- ~/php/tp1/view/city.php -->
-
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -8,18 +7,18 @@
     </head>
     <title>One city</title>
     <body>
-    <h1>City <?= $params['city']['name']; ?></h1>
+    <h1>City <?= $params['city']->getName(); ?></h1>
         <p>
-            Name of the city: <?= $params['city']['name']; ?>
+            Name of the city: <?= $params['city']->getName(); ?>
         </p>
         <p>
-            Country: <?= $params['city']['country']; ?>
+            Country: <?= $params['city']->getCountry(); ?>
         </p>
         <p>
-            Quality of life: <?= $params['city']['life']; ?>
+            Quality of life: <?= $params['city']->getCountry(); ?>
         </p>
 
-        <a href="/tp1_php/">
+        <a href="/../Test/">
             Back to list of cities
         </a>
     </body>

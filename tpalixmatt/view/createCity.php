@@ -17,24 +17,24 @@
         ";
     } ?>
 
-    <form action="/tp1_php/createDBHandler/" method="POST">
+    <form action="/Test/create/handleCreate/" method="POST">
         <p>
             <label>Name of the city</label>
-            <input type="text" name="name" value="<?php if(isset($params['city'])) echo $params['city']['name']; ?>">
+            <input type="text" name="name" value="<?php if(isset($params['city']['name'])) echo $params['city']['name']; ?>">
         </p>
         <p>
             <label>Country of the city</label>
-            <input type="text" name="country" value="<?php if(isset($params['city'])) echo $params['city']['country']; ?>">
+            <input type="text" name="country" value="<?php if(isset($params['city']['country'])) echo $params['city']['country']; ?>">
         </p>
         <p>
             <label>Life quality of the city</label>
-            <input type="text" name="life" placeholder="A, B, C... just a letter" value="<?php if(isset($params['city'])) echo $params['city']['life']; ?>">
+            <input type="text" name="life" placeholder="A, B, C... just a letter" value="<?php if(isset($params['city']['life'])) echo $params['city']['life']; ?>">
         </p>
 
         <button type="submit">Submit</button>
     </form>
     <p>
-        <a href="recherche.php">Search cities by name</a>
+        <a href="/Test/recherche/">Search cities by name</a>
     </p>
 
     </body>
