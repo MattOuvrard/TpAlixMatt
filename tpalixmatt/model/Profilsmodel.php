@@ -39,14 +39,14 @@ class ProfilsModel implements ProfilsInterface {
     }
 
     public function findOneById($id) {
-        $query = $this->conn->prepare('SELECT c.id, c.name, c.country, c.life FROM city c WHERE c.id = :id'); // Création de la requête + utilisation order by pour ne pas utiliser sort
+        $query = $this->conn->prepare('SELECT p.id, p.nom_utilisateur ,p.maison FROM profils p WHERE p.id = :id'); // Création de la requête + utilisation order by pour ne pas utiliser sort
         $query->execute([':id' => $id]); // Exécution de la requête
         return $query->fetch(\PDO::FETCH_ASSOC);
     }
 	
 
-    public function save(Array $city) : Bool {
-        $query = $this->conn->prepare('INSERT INTO city (name, country, life) VALUES (:name, :country, :life)'); // Création de la requête + utilisation order by pour ne pas utiliser sort
+    public function save(Array $profils) : Bool {
+        $query = $this->conn->prepare('INSERT INTO profils (nom, prenom, nom_utilisateur, mot_de_passe, age, profession, description, type_de_magie,maison) VALUES (:nom, prenom, :nom_utilisateur, :mot_de_passe, :age, :profession, :description, :type_de_magie,:maison)'); // Création de la requête + utilisation order by pour ne pas utiliser sort
         return $query->execute([
             ':name' => $city['name'],
             ':country'=> $city['country'],
