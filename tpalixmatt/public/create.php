@@ -5,7 +5,7 @@ require_once __DIR__ . '/../controller/CityController.php';
 
 $Database = new Database(
     "127.0.0.1",
-    "citytowns",
+    "tpalixmatt",
     "root",
     "",
     "3306"
