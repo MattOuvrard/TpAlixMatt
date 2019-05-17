@@ -19,4 +19,6 @@ class Database {
     public function getConnection() {
         return $this->dbh;
     }
+
+    /* Coucou */
 }
