@@ -7,9 +7,9 @@
  */
 namespace Model;
 
-interface CitiesInterface
+interface ProfilsInterface
 {
     public function findAll();
 
-    public function save(Array $city);
+    public function save(Array $profils);
 }
