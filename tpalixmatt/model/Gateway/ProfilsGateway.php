@@ -4,7 +4,7 @@ namespace Model\Gateway;
 
 use App\Src\App;
 
-class CityGateway
+class ProfilsGateway
 {
     private $conn;
 
@@ -108,7 +108,7 @@ class CityGateway
         return $this->House;
     }
     
-       public function setTypeOfMagic($House): void
+       public function setHouse($House): void
     {
         $this->House = $House;
     }

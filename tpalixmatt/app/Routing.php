@@ -9,6 +9,7 @@ namespace App;
 
 use Controller\CityController;
 use Controller\CountryController;
+use Controller\ProfilController;
 use Model\CityModel;
 use Database\Database;
 use App\Src\App;
@@ -26,53 +27,88 @@ class Routing
 
     public function setup()
     {
-        $app = $this->app;
+       $app = $this->app;
         $this->app->get('/', function () use ($app)
         {
-            $controller =  new CityController($app);
-            $controller->citiesHandler();
+            $controller =  new ProfilController($app);
+            $controller->Login();
         });
-
-        $this->app->get('/city/(\d+)', function ($id) use ($app)
+		
+		
+		$this->app->get('/city/(\d+)', function ($id) use ($app)
         {
-            $controller =  new CityController($app);
-            $controller->cityHandler($id);
+           $controller =  new ProfilController($app);
+           $controller->ProfilHandler($id);
         });
-
-        $this->app->get('/recherche/(\w+)', function ($city) use ($app)
+		
+		
+        $this->app->get('/profils', function () use ($app)
         {
-            $controller =  new CityController($app);
-            $controller->searchHandler($city);
+            $controller =  new ProfilController($app);
+            $controller->ProfilsHandler();
         });
-
-        $this->app->get('/create/', function () use ($app)
+		
+		
+        $this->app->get('/signup', function () use ($app)
         {
-            $controller =  new CityController($app);
-            $controller->createHandler();
+            $controller =  new ProfilController($app);
+            $controller->LogInOk();
         });
+		
+		$this->app->get('/login', function () use ($app){
+			$controller = new ProfilController($app);
+			$controller->
+		});
+		
+		
+		
+        // $app = $this->app;
+        // $this->app->get('/', function () use ($app)
+        // {
+            // $controller =  new CityController($app);
+            // $controller->citiesHandler();
+        // });
 
-        $this->app->get('/countries/', function () use ($app)
-        {
-            $controller =  new CountryController($app);
-            $controller->countriesHandler();
-        });
+        // $this->app->get('/city/(\d+)', function ($id) use ($app)
+        // {
+            // $controller =  new CityController($app);
+            // $controller->cityHandler($id);
+        // });
 
-        $this->app->get('/countries/country/(\w+)', function ($countryName) use ($app)
-        {
-            $controller =  new CountryController($app);
-            $controller->countryHandler($countryName);
-        });
+        // $this->app->get('/recherche/(\w+)', function ($city) use ($app)
+        // {
+            // $controller =  new CityController($app);
+            // $controller->searchHandler($city);
+        // });
 
-        $this->app->get('/countries/country/city/(\d+)', function ($id) use ($app)
-        {
-            $controller =  new CityController($app);
-            $controller->cityHandler($id);
-        });
+        // $this->app->get('/create/', function () use ($app)
+        // {
+            // $controller =  new CityController($app);
+            // $controller->createHandler();
+        // });
 
-        $this->app->post('/create/handleCreate/', function () use ($app)
-        {
-            $controller =  new CityController($app);
-            $controller->createDBHandler();
-        });
+        // $this->app->get('/countries/', function () use ($app)
+        // {
+            // $controller =  new CountryController($app);
+            // $controller->countriesHandler();
+        // });
+
+        // $this->app->get('/countries/country/(\w+)', function ($countryName) use ($app)
+        // {
+            // $controller =  new CountryController($app);
+            // $controller->countryHandler($countryName);
+        // });
+
+        // $this->app->get('/countries/country/city/(\d+)', function ($id) use ($app)
+        // {
+            // $controller =  new CityController($app);
+            // $controller->cityHandler($id);
+        // });
+
+        // $this->app->post('/create/handleCreate/', function () use ($app)
+        // {
+            // $controller =  new CityController($app);
+            // $controller->createDBHandler();
+        // });
     }
 }
