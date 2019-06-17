@@ -69,7 +69,7 @@ class App
     public function run()
     {
         $method = $_SERVER['REQUEST_METHOD'] ?? self::GET;
-        $uri = substr($_SERVER['REQUEST_URI'], 5) ?? '/';
+        $uri = substr($_SERVER['REQUEST_URI'], 16) ?? '/';
 
         foreach ($this->routes as $route)
         {
@@ -79,7 +79,7 @@ class App
             }
         }
 
-        throw new Error('No routes available for this uri');
+        throw new \Error('No routes available for this uri');
     }
 
 
@@ -97,7 +97,7 @@ class App
         }
         catch (\Exception $e)
         {
-            throw new Error('There was an error during the processing of your request');
+            throw new \Error('There was an error during the processing of your request ');
         }
 
     }

@@ -9,6 +9,7 @@ namespace App;
 
 use Controller\CityController;
 use Controller\CountryController;
+use Controller\ProfilController;
 use Model\CityModel;
 use Database\Database;
 use App\Src\App;
@@ -26,53 +27,119 @@ class Routing
 
     public function setup()
     {
-        $app = $this->app;
+       $app = $this->app;
+
         $this->app->get('/', function () use ($app)
         {
-            $controller =  new CityController($app);
-            $controller->citiesHandler();
+            $controller =  new ProfilController($app);
+            $controller->Login();
         });
 
-        $this->app->get('/city/(\d+)', function ($id) use ($app)
+
+		$this->app->get('/myProfil/(\d+)', function ($id) use ($app)
         {
-            $controller =  new CityController($app);
-            $controller->cityHandler($id);
+           $controller =  new ProfilController($app);
+           $controller->ProfilHandler($id);
         });
 
-        $this->app->get('/recherche/(\w+)', function ($city) use ($app)
-        {
-            $controller =  new CityController($app);
-            $controller->searchHandler($city);
+        $this->app->post('/profilCheck', function () use ($app)
+            {
+                $controller =  new ProfilController($app);
+                $controller->verif();
+
+            });
+
+        $this->app->post('/signup/signcheck', function() use($app){
+          $controller = new ProfilController($app);
+          $controller->createProfils();
         });
 
-        $this->app->get('/create/', function () use ($app)
+
+        $this->app->get('/profils', function () use ($app)
         {
-            $controller =  new CityController($app);
-            $controller->createHandler();
+            $controller =  new ProfilController($app);
+            $controller->ProfilsHandler();
         });
 
-        $this->app->get('/countries/', function () use ($app)
+
+        $this->app->get('/signup', function () use ($app)
         {
-            $controller =  new CountryController($app);
-            $controller->countriesHandler();
+            $controller =  new ProfilController($app);
+            $controller->LogInOk();
         });
 
-        $this->app->get('/countries/country/(\w+)', function ($countryName) use ($app)
+        $this->app->post('/tweet', function () use ($app)
         {
-            $controller =  new CountryController($app);
-            $controller->countryHandler($countryName);
+            $controller =  new ProfilController($app);
+            $controller->tweet();
         });
 
-        $this->app->get('/countries/country/city/(\d+)', function ($id) use ($app)
-        {
-            $controller =  new CityController($app);
-            $controller->cityHandler($id);
+        $this->app->get('/logout', function() use ($app){
+            $controller = new ProfilController($app);
+            $controller->Logout();
         });
 
-        $this->app->post('/create/handleCreate/', function () use ($app)
+        $this->app->get('/otherProfil/(\d+)', function ($id) use ($app)
         {
-            $controller =  new CityController($app);
-            $controller->createDBHandler();
+            $controller =  new ProfilController($app);
+            $controller->ProfilHandlerOther($id);
         });
+
+        $this->app->post('/follow/(\d+)', function ($id) use ($app)
+        {
+            $controller =  new ProfilController($app);
+            $controller->follow($id);
+        });
+
+        $this->app->post('/search', function () use ($app)
+        {
+            $controller =  new ProfilController($app);
+            $controller->search();
+        });
+
+        $this->app->post('/retweet/(\d+)', function ($id) use ($app)
+        {
+            $controller =  new ProfilController($app);
+            $controller->retweet($id);
+        });
+
+        $this->app->get('/editProfil/(\d+)', function ($id) use ($app)
+        {
+            $controller =  new ProfilController($app);
+            $controller->editProfil($id);
+        });
+
+
+        $this->app->post('/editDescription/(\d+)', function ($id) use ($app)
+        {
+            $controller =  new ProfilController($app);
+            $controller->editDescription($id);
+        });
+
+        $this->app->post('/editHouse/(\d+)', function ($id) use ($app)
+        {
+            $controller =  new ProfilController($app);
+            $controller->editHouse($id);
+        });
+
+        $this->app->get('/brique', function () use($app){
+          $controller = new ProfilController($app);
+          $controller->brique();
+        });
+        $this->app->get('/journal', function() use ($app){
+          $controller= new ProfilController($app);
+          $controller->journal();
+        });
+        $this->app->get('/house/(\d+)', function($house)use($app){
+          $controller =new ProfilController($app);
+          $controller->getHouseImage($house);
+        });
+
+      $this->app->get('/police', function () use ($app){
+        $controller = new ProfilController($app);
+        $controller->police();
+      });
+
+
     }
 }

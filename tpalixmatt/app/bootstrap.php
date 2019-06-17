@@ -9,8 +9,8 @@ namespace App;
 use App\Src\App;
 use App\Src\ServiceContainer\ServiceContainer;
 use Database\Database;
-use Model\CityModel;
-use Model\Finder\CityFinder;
+/*use Model\CityModel;*/
+use Model\Finder\ProfilFinder;
 
 $container = new ServiceContainer();
 $app = new  App($container);
@@ -18,13 +18,13 @@ $app = new  App($container);
 $app->setService('database', new Database
 (
     "127.0.0.1",
-    "citytowns",
+    "tpalixmatt",
     "root",
     "",
     "3306"
 ));
 
-$app->setService('cityFinder', new CityFinder($app));
+$app->setService('ProfilFinder', new ProfilFinder($app));
 
 $app->setService('render', function (String $template, Array $params = [])
 {
@@ -36,6 +36,16 @@ $app->setService('render', function (String $template, Array $params = [])
     include __DIR__ . '/../view/' . $template . '.php';
     ob_end_flush();
     die();
+});
+
+$app->setService('image' , function(String $url) {
+  include __DiR__ . '/../view/image/'. $url . '.jpg';
+  echo '/../image/'. $url . '.jpg';
+});
+
+$app->setService('police', function(){
+  include __DiR__ . '/../view/image/HARRYP__.TTF';
+  echo '/../view/image/HARRYP__.TTF';
 });
 
 $routing = new  Routing($app);
